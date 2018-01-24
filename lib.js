@@ -83,7 +83,7 @@ const parseLines = (l) => {
 // POSITION
 const parsePosition = (x) => {
 	x = parseFloat(x)
-	if(Number.isNaN(x) || !x || x < 0 || x > 1) throw new Error('Invalid platform position.')
+	if(Number.isNaN(x) || x < 0 || x > 1) throw new Error('Invalid platform position.')
 	return x
 }
 const queryPosition = (msg) => new Promise((yay, nay) =>
