@@ -142,7 +142,7 @@ const buildEntry = (station, samePlatform, fromLines, fromStation, fromTrack, fr
 const buildEntries = (props, reverse) => {
 	const entries = []
 	entries.push(buildEntry(props.station, props.samePlatform, props.fromLines, props.fromStation, props.fromTrack, props.fromPosition, props.toLines, props.toStation, props.toTrack, props.toPosition))
-	if(reverse) entries.push(buildEntry(props.station, props.samePlatform, props.toLines, props.toStation, props.toTrack, props.toPosition, props.fromLines, props.fromStation, props.fromTrack, props.fromPosition))
+	if(reverse) entries.push(buildEntry(props.station, props.samePlatform, props.toLines, props.toStation, props.toTrack, 1-props.toPosition, props.fromLines, props.fromStation, props.fromTrack, 1-props.fromPosition))
 	return entries
 }
 
