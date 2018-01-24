@@ -2,7 +2,6 @@
 'use strict'
 
 const mri = require('mri')
-const native = require('cli-native')
 const so = require('so')
 const chalk = require('chalk')
 const fs = require('fs')

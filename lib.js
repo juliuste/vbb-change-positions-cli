@@ -2,9 +2,6 @@
 
 const client = require('vbb-client')
 const autocompletePrompt = require('cli-autocomplete')
-const parseTime = require('parse-messy-time')
-const datePrompt = require('date-prompt')
-const numberPrompt = require('number-prompt')
 const switchPrompt = require('switch-prompt')
 const textPrompt = require('text-prompt')
 const util = require('vbb-util')
