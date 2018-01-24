@@ -1,0 +1,65 @@
+{
+	"name": "vbb-cli",
+	"description": "CLI for editing vbb-change-positions",
+	"version": "0.0.0",
+	"keywords": [
+		"vbb",
+		"berlin",
+		"brandenburg",
+		"verkehrsverbund",
+		"public",
+		"transport",
+		"change",
+		"nahverkehr",
+		"ubahn",
+		"sbahn",
+		"metro",
+		"train",
+		"germany",
+		"rail",
+		"vbb-change-positions"
+	],
+	"bin": {
+		"vbb-change-positions": "./bin.js"
+	},
+	"author": "Julius Tens <mail@juliustens.eu>",
+	"homepage": "https://github.com/juliuste/boilerplate",
+	"repository": "juliuste/boilerplate",
+	"bugs": "https://github.com/juliuste/boilerplate/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"files": [
+		"lib.js",
+		"bin.js"
+	],
+	"dependencies": {
+		"@derhuerst/location": "^0.5.0",
+		"chalk": "^2.0.1",
+		"cli-autocomplete": "^0.4.0",
+		"cli-native": "^1.0.0",
+		"cli-table2": "^0.2.0",
+		"date-prompt": "^0.7.0",
+		"figures": "^2.0.0",
+		"gps-distance": "^0.0.4",
+		"kuler": "^0.0.0",
+		"lodash.sortby": "^4.7.0",
+		"lodash.uniqby": "^4.7.0",
+		"moment": "^2.18.1",
+		"mri": "^1.1.0",
+		"ms": "^2.0.0",
+		"multiselect-prompt": "^0.3.0",
+		"number-prompt": "^0.2.0",
+		"pad-right": "^0.2.2",
+		"parse-messy-time": "^2.1.0",
+		"select-prompt": "^0.3.1",
+		"so": "^1.0.1",
+		"switch-prompt": "^0.1.0",
+		"text-prompt": "^0.1.2",
+		"vbb-client": "^2.0.0",
+		"vbb-lines-at": "^3.10.0",
+		"vbb-util": "^0.10.1"
+	},
+	"scripts": {}
+}
