@@ -1,5 +1,5 @@
 {
-	"name": "vbb-cli",
+	"name": "vbb-change-positions-cli",
 	"description": "CLI for editing vbb-change-positions",
 	"version": "0.0.0",
 	"keywords": [
