@@ -139,10 +139,22 @@ const buildEntry = (station, samePlatform, fromLines, fromStation, fromTrack, fr
 	return res
 }
 
+const revertLines = (lines) => {
+	if(lines.S41){
+		lines.S42 = true
+		lines.S41 = false
+	}
+	else if(lines.S42){
+		lines.S42 = false
+		lines.S41 = true
+	}
+	return lines
+}
+
 const buildEntries = (props, reverse) => {
 	const entries = []
 	entries.push(buildEntry(props.station, props.samePlatform, props.fromLines, props.fromStation, props.fromTrack, props.fromPosition, props.toLines, props.toStation, props.toTrack, props.toPosition))
-	if(reverse) entries.push(buildEntry(props.station, props.samePlatform, props.toLines, props.toStation, props.toTrack, 1-props.toPosition, props.fromLines, props.fromStation, props.fromTrack, 1-props.fromPosition))
+	if(reverse) entries.push(buildEntry(props.station, props.samePlatform, revertLines(props.toLines), props.toStation, props.toTrack, 1-props.toPosition, revertLines(props.fromLines), props.fromStation, props.fromTrack, 1-props.fromPosition))
 	return entries
 }
 

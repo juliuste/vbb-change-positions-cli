@@ -1,7 +1,7 @@
 {
 	"name": "vbb-change-positions-cli",
 	"description": "CLI for editing vbb-change-positions",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"keywords": [
 		"vbb",
 		"berlin",
