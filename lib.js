@@ -11,6 +11,7 @@ const selectPrompt = require('select-prompt')
 const linesAt = require('vbb-lines-at')
 const uniqBy = require('lodash.uniqby')
 const sortBy = require('lodash.sortby')
+const round = require('lodash.round')
 
 // STATIONS
 const isStationId = (s) => /^\d{12}$/.test(s.toString())
@@ -126,12 +127,12 @@ const buildEntry = (station, samePlatform, fromLines, fromStation, fromTrack, fr
 		fromStation: fromStation.id,
 		fromStationName: fromStation.name,
 		fromTrack,
-		fromPosition,
+		fromPosition: round(fromPosition, 2),
 		toLines: Object.keys(toLines).filter(k => toLines[k]),
 		toStation: toStation.id,
 		toStationName: toStation.name,
 		toTrack,
-		toPosition,
+		toPosition: round(toPosition, 2),
 		samePlatform
 	}
 	if(!res.fromTrack) delete res.fromTrack
