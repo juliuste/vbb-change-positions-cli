@@ -46,12 +46,21 @@ const showError = function (err) {
 }
 
 const main = so(function* (opt) {
-	let station, samePlatform, fromLines, fromStation, fromTrack, fromPosition, toLines, toStation, toTrack, toPosition, reverse
+	let fromStation, toStation, samePlatform, fromLines, previousStation, fromTrack, fromPosition, toLines, nextStation, toTrack, toPosition, reverse
 
-	// query (interchange) station
-	station = yield lib.queryStation('Station?')
+	// query arrival station
+	fromStation = yield lib.queryStation('From/Arrival station?')
 	try {
-		station = yield lib.parseStation(station)
+		fromStation = yield lib.parseStation(fromStation)
+	} catch (err) {
+		showError(err)
+	}
+
+	// query departure station
+	toStation = yield lib.queryStation('To/Departure station? (leave empty to set to same as arrival station)')
+	try {
+		if(!toStation) toStation = fromStation
+		else toStation = yield lib.parseStation(toStation)
 	} catch (err) {
 		showError(err)
 	}
@@ -61,9 +70,9 @@ const main = so(function* (opt) {
 
 	// FROM
 	// query fromStation
-	fromStation = yield lib.queryStation('From station?')
+	previousStation = yield lib.queryStation('Previous station?')
 	try {
-		fromStation = yield lib.parseStation(fromStation)
+		previousStation = yield lib.parseStation(previousStation)
 	} catch (err) {
 		showError(err)
 	}
@@ -97,9 +106,9 @@ const main = so(function* (opt) {
 
 	// TO
 	// query toStation
-	toStation = yield lib.queryStation('To station?')
+	nextStation = yield lib.queryStation('Next station?')
 	try {
-		toStation = yield lib.parseStation(toStation)
+		nextStation = yield lib.parseStation(nextStation)
 	} catch (err) {
 		showError(err)
 	}
@@ -134,13 +143,14 @@ const main = so(function* (opt) {
 	reverse = yield lib.queryReverse('Also add reverse route?')
 
 	const entries = lib.buildEntries({
-		station,
-		samePlatform,
 		fromStation,
+		toStation,
+		samePlatform,
+		previousStation,
 		fromLines,
 		fromTrack,
 		fromPosition,
-		toStation,
+		nextStation,
 		toLines,
 		toTrack,
 		toPosition,

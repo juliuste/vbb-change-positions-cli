@@ -12,6 +12,7 @@ const linesAt = require('vbb-lines-at')
 const uniqBy = require('lodash.uniqby')
 const sortBy = require('lodash.sortby')
 const round = require('lodash.round')
+const pick = require('lodash.pick')
 
 // STATIONS
 const isStationId = (s) => /^\d{12}$/.test(s.toString())
@@ -119,18 +120,16 @@ const queryReverse = (msg) => new Promise((yay, nay) =>
 	.on('submit', yay)
 )
 
-const buildEntry = (station, samePlatform, fromLines, fromStation, fromTrack, fromPosition, toLines, toStation, toTrack, toPosition) => {
+const buildEntry = (fromStation, toStation, samePlatform, fromLines, previousStation, fromTrack, fromPosition, toLines, nextStation, toTrack, toPosition) => {
 	const res = {
-		station: station.id,
-		stationName: station.name,
+		fromStation: pick(fromStation, ['id', 'name']),
 		fromLines: Object.keys(fromLines).filter(k => fromLines[k]),
-		fromStation: fromStation.id,
-		fromStationName: fromStation.name,
+		previousStation: pick(previousStation, ['id', 'name']),
 		fromTrack,
 		fromPosition: round(fromPosition, 2),
+		toStation: pick(toStation, ['id', 'name']),
 		toLines: Object.keys(toLines).filter(k => toLines[k]),
-		toStation: toStation.id,
-		toStationName: toStation.name,
+		nextStation: pick(nextStation, ['id', 'name']),
 		toTrack,
 		toPosition: round(toPosition, 2),
 		samePlatform
@@ -154,8 +153,8 @@ const revertLines = (lines) => {
 
 const buildEntries = (props, reverse) => {
 	const entries = []
-	entries.push(buildEntry(props.station, props.samePlatform, props.fromLines, props.fromStation, props.fromTrack, props.fromPosition, props.toLines, props.toStation, props.toTrack, props.toPosition))
-	if(reverse) entries.push(buildEntry(props.station, props.samePlatform, revertLines(props.toLines), props.toStation, props.toTrack, 1-props.toPosition, revertLines(props.fromLines), props.fromStation, props.fromTrack, 1-props.fromPosition))
+	entries.push(buildEntry(props.fromStation, props.toStation, props.samePlatform, props.fromLines, props.previousStation, props.fromTrack, props.fromPosition, props.toLines, props.nextStation, props.toTrack, props.toPosition))
+	if(reverse) entries.push(buildEntry(props.toStation, props.fromStation, props.samePlatform, revertLines(props.toLines), props.nextStation, props.toTrack, 1-props.toPosition, revertLines(props.fromLines), props.previousStation, props.fromTrack, 1-props.fromPosition))
 	return entries
 }
 
